@@ -4,24 +4,24 @@
 
 
 namespace codingtype {
-	enum SeparaterType{
-		GBK = 0,
-		UTF8 = 1
-	};
+    enum SeparaterType{
+	GBK = 0,
+	UTF8 = 1
+    };
 }
 
 
 class SingleCharacterSeparater{
-private:
+    private:
 	char* buffer;
-	
+
 	void freebuffer() {
-		if (nullptr != buffer) {
-			delete buffer;
-			buffer = nullptr;
-		}
+	    if (nullptr != buffer) {
+		delete buffer;
+		buffer = nullptr;
+	    }
 	}
-public:
+    public:
 	SingleCharacterSeparater();
 	~SingleCharacterSeparater();
 
@@ -32,21 +32,21 @@ public:
 	const char* utf8_separater(const char* s);
 
 	void operator()(const std::string& s, std::vector<std::string>& vc, codingtype::SeparaterType stype) {
-		if (codingtype::GBK == stype) {
-			gbk_separater(s, vc);
-		}
-		else if(codingtype::UTF8 == stype) {
-			utf8_separater(s, vc);
-		}
+	    if (codingtype::GBK == stype) {
+		gbk_separater(s, vc);
+	    }
+	    else if(codingtype::UTF8 == stype) {
+		utf8_separater(s, vc);
+	    }
 	}
 
 	const char* operator()(const std::string& s, codingtype::SeparaterType stype) {
-		if (codingtype::GBK == stype) {
-			return gbk_separater(s.c_str());
-		}
-		else if(codingtype::UTF8 == stype) {
-			return utf8_separater(s.c_str());
-		}
-		return nullptr;
+	    if (codingtype::GBK == stype) {
+		return gbk_separater(s.c_str());
+	    }
+	    else if(codingtype::UTF8 == stype) {
+		return utf8_separater(s.c_str());
+	    }
+	    return nullptr;
 	}
 };
